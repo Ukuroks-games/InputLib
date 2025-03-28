@@ -1,7 +1,7 @@
 [package]
 name = "egor00f/InputLib"
 
-description = "description of package"
+description = "Just small library for more easy working with user input"
 
 version = "0.1.0"
 
@@ -10,7 +10,7 @@ registry = "https://github.com/UpliftGames/wally-index"
 # or server
 realm = "shared"
 
-license = ""
+license = "MIT"
 
 repository = "https://github/Ukuroks-Games/InputLib"
 
