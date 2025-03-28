@@ -1,5 +1,5 @@
 [package]
-name = "owner/packagename"
+name = "egor00f/InputLib"
 
 description = "description of package"
 
@@ -12,9 +12,9 @@ realm = "shared"
 
 license = ""
 
-repository = "https://github/"
+repository = "https://github/Ukuroks-Games/InputLib"
 
-authors = ["You <you mail>"]
+authors = ["Egor00f <velikiydolbayeb@gmail.com>"]
 
 exclude = ["*"]
 
