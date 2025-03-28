@@ -1,5 +1,5 @@
 [package]
-name = "egor00f/InputLib"
+name = "egor00f/inputlib"
 
 description = "Just small library for more easy working with user input"
 
