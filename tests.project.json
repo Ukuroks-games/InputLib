@@ -5,7 +5,9 @@
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
 			"Packages": {
-				"$path": "src"
+				"InputLib": {
+					"$path": "src"
+				}
 			}
 		},
 		"Workspace": {

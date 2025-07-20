@@ -1,4 +1,3 @@
-local UserInputService = game:GetService("UserInputService")
 local watchKey = require(script.Parent.watchKey)
 
 export type WhileKeyPressedController = {
@@ -7,7 +6,7 @@ export type WhileKeyPressedController = {
 }
 
 --[[
-
+	Call function while key pressed
 ]]
 return function (callback: () -> any, Keys: { Enum.KeyCode }): WhileKeyPressedController
 	local pressed, connections = watchKey(Keys)
@@ -15,7 +14,7 @@ return function (callback: () -> any, Keys: { Enum.KeyCode }): WhileKeyPressedCo
 	local c = pressed.Changed:Connect(function(a0: boolean) 
 		while pressed.Value do
 			callback()
-			wait()	-- для того что бы всё не зависло нах
+			task.wait()	-- для того что бы всё не зависло нах
 		end
 	end)
 
