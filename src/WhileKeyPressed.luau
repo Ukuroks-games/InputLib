@@ -1,4 +1,5 @@
 local UserInputService = game:GetService("UserInputService")
+local watchKey = require(script.Parent.watchKey)
 
 export type WhileKeyPressedController = {
 	Destroying: RBXScriptSignal,
@@ -9,24 +10,12 @@ export type WhileKeyPressedController = {
 
 ]]
 return function (callback: () -> any, Keys: { Enum.KeyCode }): WhileKeyPressedController
-	local pressed = Instance.new("BoolValue")
-
-	local b = UserInputService.InputBegan:Connect(function(input: InputObject, a1: boolean) 
-		if table.find(Keys, input.KeyCode) then
-			pressed.Value = true
-		end
-	end)
-
-	local e = UserInputService.InputEnded:Connect(function(input: InputObject, a1: boolean) 
-		if table.find(Keys, input.KeyCode) then
-			pressed.Value = false
-		end
-	end)
+	local pressed, connections = watchKey(Keys)
 
 	local c = pressed.Changed:Connect(function(a0: boolean) 
 		while pressed.Value do
 			callback()
-			wait()	-- для того чтоб всё не зависло нах
+			wait()	-- для того что бы всё не зависло нах
 		end
 	end)
 
@@ -38,8 +27,12 @@ return function (callback: () -> any, Keys: { Enum.KeyCode }): WhileKeyPressedCo
 		Destroy = function()
 			DestroyingEvent:Fire()
 
-			b:Disconnect()
-			e:Disconnect()
+			for _, v in pairs(connections) do
+				if v then
+					v:Disconnect()
+				end
+			end
+
 			c:Disconnect()
 
 			pressed:Destroy()
