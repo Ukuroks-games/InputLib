@@ -2,22 +2,24 @@ local watchKey = require(script.Parent.watchKey)
 
 export type WhileKeyPressedController = {
 	Destroying: RBXScriptSignal,
-	Destroy: () -> nil
+	Destroy: () -> nil,
 }
 
 --[[
 	Call function while key pressed
 ]]
-return function (callback: () -> any, Keys: { Enum.KeyCode }): WhileKeyPressedController
+return function(
+	callback: () -> any,
+	Keys: { Enum.KeyCode }
+): WhileKeyPressedController
 	local pressed, connections = watchKey(Keys)
 
-	local c = pressed.Changed:Connect(function(a0: boolean) 
+	local c = pressed.Changed:Connect(function(a0: boolean)
 		while pressed.Value do
 			callback()
-			task.wait()	-- для того что бы всё не зависло нах
+			task.wait() -- для того что бы всё не зависло нах
 		end
 	end)
-
 
 	local DestroyingEvent = Instance.new("BindableEvent")
 
@@ -36,7 +38,6 @@ return function (callback: () -> any, Keys: { Enum.KeyCode }): WhileKeyPressedCo
 
 			pressed:Destroy()
 			DestroyingEvent:Destroy()
-
-		end
+		end,
 	}
 end
