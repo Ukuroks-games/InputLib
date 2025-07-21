@@ -24,6 +24,7 @@ $(BUILD_DIR):
 	mkdir $@
 
 ./Packages: wally.toml
+	mkdir $@
 	wally install
 	
 
@@ -49,7 +50,7 @@ $(RBXM_BUILD):	library.project.json	$(SOURCES)
 
 rbxm: clean-rbxm $(RBXM_BUILD)
 
-tests.rbxl:	./Packages	tests.project.json	$(SOURCES)	tests/test.client.lua
+tests.rbxl:	./Packages	tests.project.json	$(SOURCES)
 	rojo build tests.project.json --output $@
 
 tests:	clean-tests	tests.rbxl
@@ -74,5 +75,5 @@ clean-build:
 	$(RM) $(BUILD_DIR)
 
 clean:	clean-tests	clean-build	clean-rbxm
-	$(RM) $(PACKAGE_NAME) ourcemap.json: ./Packages
+	$(RM) $(PACKAGE_NAME) sourcemap.json: ./Packages
 	rojo sourcemap tests.project.json --output $@
