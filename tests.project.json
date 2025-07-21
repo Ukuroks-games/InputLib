@@ -5,6 +5,7 @@
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
 			"Packages": {
+				"$className": "Folder",
 				"InputLib": {
 					"$path": "src"
 				}
