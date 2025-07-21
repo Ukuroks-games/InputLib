@@ -14,7 +14,7 @@ return function(
 ): WhileKeyPressedController
 	local pressed, connections = watchKey(Keys)
 
-	local c = pressed.Changed:Connect(function(a0: boolean)
+	local c = pressed.Changed:Connect(function(_: boolean)
 		while pressed.Value do
 			callback()
 			task.wait() -- для того что бы всё не зависло нах
