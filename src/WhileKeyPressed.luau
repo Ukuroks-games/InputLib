@@ -1,6 +1,7 @@
 local watchKey = require(script.Parent.watchKey)
 
 export type WhileKeyPressedController = {
+	State: BoolValue,
 	Destroying: RBXScriptSignal,
 	Destroy: () -> nil,
 }
@@ -24,6 +25,7 @@ return function(
 	local DestroyingEvent = Instance.new("BindableEvent")
 
 	return {
+		State = pressed,
 		Destroying = DestroyingEvent.Event,
 		Destroy = function()
 			DestroyingEvent:Fire()
