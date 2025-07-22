@@ -6,6 +6,6 @@ local Frame = Players.LocalPlayer.PlayerGui:WaitForChild("ScreenGui").KeyState
 
 local State = InputLib.watchKey({ Enum.KeyCode.A })
 
-State.Changed:Connect(function(a0: boolean)
+State.Changed:Connect(function(_: boolean)
 	Frame.Text = "\"A\" press state: " .. tostring(State.Value)
 end)
