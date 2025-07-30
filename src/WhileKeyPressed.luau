@@ -11,11 +11,13 @@ export type WhileKeyPressedController = {
 	]]
 	Called: RBXScriptSignal,
 	Destroying: RBXScriptSignal,
+	Pause: () -> any,
+	Resume: () -> any,
 	Destroy: () -> nil,
 }
 
 --[[
-	Call function while key pressed
+	Call function(in cycle) while key(s) pressed
 ]]
 return function(
 	callback: (InputObject: InputObject, boolean) -> any?,
@@ -24,11 +26,13 @@ return function(
 	local input = {} :: { InputObject: InputObject?, a: boolean? }
 	local pressed, connections = watchKey(Keys, input)
 	local CalledEvent = Instance.new("BindableEvent")
+	
+	local Run = true
 
 	table.insert(
 		connections,
 		pressed.Changed:Connect(function(_: boolean)
-			while pressed.Value do
+			while Run and pressed.Value do
 				CalledEvent:Fire()
 				callback(input.InputObject, input.a)
 				task.wait() -- для того что бы всё не зависло нах
@@ -42,6 +46,12 @@ return function(
 		State = pressed,
 		Destroying = DestroyingEvent.Event,
 		Called = CalledEvent.Event,
+		Pause = function()
+			Run = false
+		end,
+		Resume = function()
+			Run = true
+		end,
 		Destroy = function()
 			DestroyingEvent:Fire()
 

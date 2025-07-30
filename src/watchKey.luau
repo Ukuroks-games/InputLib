@@ -24,7 +24,7 @@ return function(
 	end
 
 	local b = UserInputService.InputBegan:Connect(InputF)
-	local f = UserInputService.InputChangedConnect(InputF)
+	local f = UserInputService.InputChanged:Connect(InputF)
 
 	local e = UserInputService.InputEnded:Connect(
 		function(input: InputObject, _: boolean)

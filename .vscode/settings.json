@@ -1,28 +1,20 @@
 {
 	"editor.insertSpaces": false,
 	"editor.defaultFormatter": "JohnnyMorganz.stylua",
-	"[yaml]": {
-        	"editor.insertSpaces": true,
-        	"editor.tabSize": 2,
-        	"editor.autoIndent": "advanced",
-        	"diffEditor.ignoreTrimWhitespace": false
-    	},
-	
 	"cSpell.enabled": true,
 	"cSpell.words": [
 		"rbxl",
 		"Roblox",
-		"rojo"
+		"rojo",
+		"tostring"
 	],
-
 	"cSpell.ignorePaths": [
 		"vscode-extension",
 		".git/objects",
-		".vscode",	// ignore vscode workspace settings
+		".vscode", // ignore vscode workspace settings
 		".vscode-insiders",
-		"*.toml"	// ignore toml files
+		"*.toml" // ignore toml files
 	],
-
 	"luau-lsp.sourcemap.rojoProjectFile": "tests.project.json",
-	"luau-lsp.platform.type": "roblox"
+	"luau-lsp.platform.type": "roblox",
 }
