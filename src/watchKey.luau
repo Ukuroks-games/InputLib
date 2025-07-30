@@ -7,16 +7,24 @@ local UserInputService = game:GetService("UserInputService")
 
 	returned connections destroying automatically, but if you wanna to disconnect them, you must just disconnect all connections in table
 ]]
-return function(Keys: { Enum.KeyCode }): (BoolValue, { RBXScriptConnection })
+return function(
+	Keys: { Enum.KeyCode },
+	Input: { InputObject: InputObject?, a: boolean? }?
+): (BoolValue, { RBXScriptConnection })
 	local pressed = Instance.new("BoolValue")
 
-	local b = UserInputService.InputBegan:Connect(
-		function(input: InputObject, _: boolean)
-			if table.find(Keys, input.KeyCode) then
-				pressed.Value = true
+	local function InputF(input: InputObject, a: boolean)
+		if table.find(Keys, input.KeyCode) then
+			if Input then
+				Input.InputObject = input
+				Input.a = a
 			end
+			pressed.Value = true
 		end
-	)
+	end
+
+	local b = UserInputService.InputBegan:Connect(InputF)
+	local f = UserInputService.InputChangedConnect(InputF)
 
 	local e = UserInputService.InputEnded:Connect(
 		function(input: InputObject, _: boolean)
@@ -31,5 +39,5 @@ return function(Keys: { Enum.KeyCode }): (BoolValue, { RBXScriptConnection })
 		e:Disconnect()
 	end)
 
-	return pressed, { b, e, d }
+	return pressed, { b, e, d, f }
 end

@@ -5,6 +5,7 @@ export type WhileKeyPressedController = {
 		Current keys state
 	]]
 	State: BoolValue,
+
 	--[[
 		Fire where function called
 	]]
@@ -17,19 +18,23 @@ export type WhileKeyPressedController = {
 	Call function while key pressed
 ]]
 return function(
-	callback: () -> any,
+	callback: (InputObject: InputObject, boolean) -> any?,
 	Keys: { Enum.KeyCode }
 ): WhileKeyPressedController
-	local pressed, connections = watchKey(Keys)
+	local input = {} :: { InputObject: InputObject?, a: boolean? }
+	local pressed, connections = watchKey(Keys, input)
 	local CalledEvent = Instance.new("BindableEvent")
 
-	local c = pressed.Changed:Connect(function(_: boolean)
-		while pressed.Value do
-			CalledEvent:Fire()
-			callback()
-			task.wait() -- для того что бы всё не зависло нах
-		end
-	end)
+	table.insert(
+		connections,
+		pressed.Changed:Connect(function(_: boolean)
+			while pressed.Value do
+				CalledEvent:Fire()
+				callback(input.InputObject, input.a)
+				task.wait() -- для того что бы всё не зависло нах
+			end
+		end)
+	)
 
 	local DestroyingEvent = Instance.new("BindableEvent")
 
@@ -45,8 +50,6 @@ return function(
 					v:Disconnect()
 				end
 			end
-
-			c:Disconnect()
 
 			pressed:Destroy()
 			CalledEvent:Destroy()
