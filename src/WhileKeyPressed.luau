@@ -11,8 +11,11 @@ export type WhileKeyPressedController = {
 	]]
 	Called: RBXScriptSignal,
 	Destroying: RBXScriptSignal,
+
 	Pause: () -> any,
+
 	Resume: () -> any,
+
 	Destroy: () -> nil,
 }
 

@@ -24,7 +24,6 @@ $(BUILD_DIR):
 	mkdir $@
 
 ./Packages: wally.toml
-	mkdir $@
 	wally install
 	
 
@@ -76,4 +75,3 @@ clean-build:
 
 clean:	clean-tests	clean-build	clean-rbxm
 	$(RM) $(PACKAGE_NAME) sourcemap.json: ./Packages
-	rojo sourcemap tests.project.json --output $@

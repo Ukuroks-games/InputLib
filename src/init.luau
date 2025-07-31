@@ -1,4 +1,9 @@
+local WhileKeyPressed = require(script.WhileKeyPressed)
+local watchKey = require(script.watchKey)
+
+export type WhileKeyPressedController = WhileKeyPressed.WhileKeyPressedController
+
 return {
-	WhileKeyPressed = require(script.WhileKeyPressed),
-	watchKey = require(script.watchKey)
+	WhileKeyPressed = WhileKeyPressed,
+	watchKey = watchKey,
 }
