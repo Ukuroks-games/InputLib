@@ -49,7 +49,7 @@ $(PACKAGE_NAME):	$(BUILD_SOURCES)	$(BUILD_DIR)/wally.toml
 package:	clean-package	clean-build	$(PACKAGE_NAME)
 	
 
-publish: clean-build 	$(BUILD_SOURCES)
+publish: clean-build 	$(BUILD_SOURCES)	$(BUILD_DIR)/wally.toml
 	wally publish --project-path $(BUILD_DIR)
 
 lint:
