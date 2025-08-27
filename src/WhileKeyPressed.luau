@@ -23,21 +23,23 @@ export type WhileKeyPressedController = {
 	Call function(in cycle) while key(s) pressed
 ]]
 return function(
-	callback: (InputObject: InputObject, boolean) -> any?,
+	callback: (InputObject: InputObject, boolean) -> boolean,
 	Keys: { Enum.KeyCode }
 ): WhileKeyPressedController
 	local input = {} :: { InputObject: InputObject?, a: boolean? }
 	local pressed, connections = watchKey(Keys, input)
 	local CalledEvent = Instance.new("BindableEvent")
-	
+
 	local Run = true
 
 	table.insert(
 		connections,
 		pressed.Changed:Connect(function(_: boolean)
 			while Run and pressed.Value do
-				CalledEvent:Fire()
-				callback(input.InputObject, input.a)
+				if callback(input.InputObject, input.a) then
+					CalledEvent:Fire()
+				end
+
 				task.wait() -- для того что бы всё не зависло нах
 			end
 		end)
