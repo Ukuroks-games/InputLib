@@ -18,4 +18,13 @@
 	"luau-lsp.sourcemap.rojoProjectFile": "tests.project.json",
 	"luau-lsp.platform.type": "roblox",
 	"luau-lsp.types.robloxSecurityLevel": "LocalUserSecurity",
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[toml]": {
+		"editor.defaultFormatter": "tamasfe.even-better-toml"
+	},
+	"luau-lsp.sourcemap.useVSCodeWatcher": true,
+	"luau-lsp.sourcemap.generatorCommand": "make sourcemap.json",
+	"stylua.targetReleaseVersion": "latest",
 }
