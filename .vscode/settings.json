@@ -17,4 +17,5 @@
 	],
 	"luau-lsp.sourcemap.rojoProjectFile": "tests.project.json",
 	"luau-lsp.platform.type": "roblox",
+	"luau-lsp.types.robloxSecurityLevel": "LocalUserSecurity",
 }

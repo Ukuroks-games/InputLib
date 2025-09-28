@@ -13,11 +13,13 @@ RBXM_BUILD = $(LIBNAME)lib.rbxm
 SOURCES = \
 	src/init.luau	\
 	src/watchKey.luau	\
-	src/WhileKeyPressed.luau
+	src/WhileKeyPressed.luau	\
+	src/onUserInput.luau
 
 TEST_SOURCES = \
 	tests/watchKey.client.luau	\
-	tests/WhileKeyPressed.client.luau
+	tests/WhileKeyPressed.client.luau	\
+	tests/OnUserInput.client.luau
 
 ROJO_PROJECTS=projects
 
@@ -29,7 +31,7 @@ GENERATE_SOURCEMAP = tests
 ##### Tests ###############
 
 
-tests.rbxl:	tests.project.json	$(PackagesDir)	$(DevPackagesDir)	$(SOURCES)	$(TEST_SOURCES)
+tests.rbxl:	tests.project.json	$(SOURCES)	$(TEST_SOURCES)
 	$(DEFAULT_RBXL_BUILD)
 
 
